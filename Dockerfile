@@ -11,17 +11,27 @@ ENV DOCS=$SIAB_HOME/docs DATA=$SIAB_HOME/data WORK=$SIAB_HOME/work
 USER root
 ADD copy_course.sh /scripts/copy_course.sh
 RUN chmod +x /scripts/copy_course.sh 
-# need fastqc, samtools bwa bowtie picard-tools GATK jre wget git
-RUN apt-get update && apt-get -y install bowtie bwa curl default-jre fastqc git gzip monit \
-    picard-tools poppler-utils samtools sudo wget
+# need fastqc, screen and wget
+RUN apt-get update && apt-get -y install screen wget fastqc
 RUN  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* 
 #fix fastqc
 RUN mkdir /etc/fastqc && mkdir /etc/fastqc/Configuration
 ADD fastqc/* /etc/fastqc/Configuration/
+# install Miniconda
+RUN wget "https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh"  && bash Miniconda3-latest-Linux-x86_64.sh
+RUN echo 'export PATH=/home/bsbXX/miniconda3/bin:$PATH' >> ~/.bashrc && source .bashrc 
 
-RUN mkdir $DOCS && mkdir $DATA &&  mkdir $WORK && mkdir /coursehome
+RUN mkdir $DOCS && mkdir $DATA &&  mkdir $WORK && mkdir /coursehome && conda config --add channels r \
+&& conda config --add channels conda-forge && conda config --add channels bioconda
+#Install seqkit
+RUN conda install -y seqkit
+# install flash
+#
+# Install spades
+RUN conda install spades 
+
+
 #RUN  mkdir $DOCS && mkdir $DATA && mkdir $WORK
-
 ADD Docs\* $DOCS
 ADD Data\* $DATA
 ADD GenomeAnalysisTK.jar $SIAB_HOME
