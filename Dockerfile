@@ -32,13 +32,12 @@ RUN conda install spades
 
 
 #RUN  mkdir $DOCS && mkdir $DATA && mkdir $WORK
-ADD Docs\* $DOCS
-ADD Data\* $DATA
-ADD GenomeAnalysisTK.jar $SIAB_HOME
+# ADD Docs\* $DOCS
+# ADD Data\* $DATA
 ADD Welcome.txt /etc/motd
 
-ADD entrypoint.sh /scripts/entrypoint.sh
-ADD launchsiab.sh /scripts/launchsiab.sh
+#ADD entrypoint.sh /scripts/entrypoint.sh
+#ADD launchsiab.sh /scripts/launchsiab.sh
 #RUN chmod +x /usr/local/sbin/entrypoint.sh
 RUN chmod +x /scripts/entrypoint.sh && chmod +x /scripts/launchsiab.sh
 
