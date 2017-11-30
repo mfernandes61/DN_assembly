@@ -1,0 +1,12 @@
+Welcome to the QIB Dockerised version of Andrea's 
+Introduction to De Novo assembly using Spades course!
+This version will run on any linux machine running Docker 
+Host (or on Windows PC & Macs running Docker Toolbox (Kitematic)).
+
+*** NB ****
+In Kitematic you will need to map the volume /coursehome to a directory 
+on your hard disk. Next stop then start the container (buttons towards 
+top RH corner) log in again and type '/scripts/copy_course.sh' to
+copy the tools, data and documents to the mapped directory on your
+local hard disk.
+***********
